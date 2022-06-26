@@ -59,7 +59,9 @@ export default {
   data() {
     return {
       options: {
-        loop: false,
+        autoplay: true,
+        loop: true,
+        autoplayTimeout: 2000,
         perPage: 1,
         paginationEnabled: true,
         paginationActiveColor: "#ff5e3a",
@@ -70,16 +72,10 @@ export default {
       },
       listFilter: ["Jewellery", "Accessories", "Dresses", "Footwear"],
       selected: "Jewellery",
-      total_pagination: 0,
-      active_slide: 0,
     };
   },
   computed: {
     ...mapState("products", ["filter_product"]),
-
-    total_product() {
-      return this.filter_product.length;
-    },
   },
   mounted() {
     this.getProducts();
@@ -88,7 +84,6 @@ export default {
     ...mapActions("products", ["getDataFilterProducts"]),
     async getProducts() {
       await this.getDataFilterProducts(this.selected);
-      this.checkPagination();
     },
 
     rating(rate) {
@@ -99,29 +94,6 @@ export default {
       this.selected = item;
 
       this.getProducts();
-    },
-
-    checkPagination() {
-      let slides = 0;
-      console.log(screen.width);
-      if (screen.width < 567) {
-        slides = 1;
-      } else if (screen.width < 996) {
-        slides = 2;
-      } else {
-        slides = 3;
-      }
-      this.total_pagination = Math.ceil(this.total_product / slides);
-    },
-    checkActive(item) {
-      if (item === this.active_slide) {
-        return "swiper-pagination-bullet swiper-pagination-bullet-active";
-      } else {
-        return "swiper-pagination-bullet";
-      }
-    },
-    changeProduct(item) {
-      this.active_slide = item.realIndex;
     },
   },
 };

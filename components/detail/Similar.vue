@@ -8,7 +8,7 @@
           v-for="(item, index) in data"
           :key="index + 'collections'"
         >
-          <NuxtLink :to="`${item.category.toLowerCase()}/${item.id}`">
+          <NuxtLink :to="`${item.id}`">
             <div class="product">
               <div class="top d-flex">
                 <img :src="item.url" alt="" />
@@ -49,7 +49,9 @@ export default {
   data() {
     return {
       options: {
-        loop: false,
+        autoplay: true,
+        loop: true,
+        autoplayTimeout: 2000,
         perPage: 1,
         paginationEnabled: true,
         paginationActiveColor: "#ff5e3a",

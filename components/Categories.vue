@@ -11,28 +11,30 @@
         v-for="(item, index) in data"
         :key="index + 'categories'"
       >
-        <div class="top d-flex">
-          <img :src="item.url" alt="" />
-          <div class="icon d-flex">
-            <em class="bx bxs-heart"></em>
-          </div>
-        </div>
-        <div class="bottom">
-          <div class="d-flex">
-            <h4>{{ item.title }}</h4>
-            <a href="" class="btn cart-btn">Add to Cart</a>
-          </div>
-          <div class="d-flex">
-            <div class="price">${{ item.price }}</div>
-            <div class="rating">
-              <em
-                class="bx bxs-star"
-                v-for="index in rating(item.rating)"
-                :key="index + 'star'"
-              ></em>
+        <NuxtLink :to="`${item.category.toLowerCase()}/${item.id}`">
+          <div class="top d-flex">
+            <img :src="item.url" alt="" />
+            <div class="icon d-flex">
+              <em class="bx bxs-heart"></em>
             </div>
           </div>
-        </div>
+          <div class="bottom">
+            <div class="d-flex">
+              <h4>{{ item.title }}</h4>
+              <a href="" class="btn cart-btn">Add to Cart</a>
+            </div>
+            <div class="d-flex">
+              <div class="price">${{ item.price }}</div>
+              <div class="rating">
+                <em
+                  class="bx bxs-star"
+                  v-for="index in rating(item.rating)"
+                  :key="index + 'star'"
+                ></em>
+              </div>
+            </div>
+          </div>
+        </NuxtLink>
       </div>
     </div>
 
