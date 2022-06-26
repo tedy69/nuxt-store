@@ -56,7 +56,9 @@ export default {
   data() {
     return {
       options: {
-        loop: false,
+        autoplay: true,
+        loop: true,
+        autoplayTimeout: 2000,
         perPage: 1,
         paginationEnabled: true,
         paginationActiveColor: "#ff5e3a",

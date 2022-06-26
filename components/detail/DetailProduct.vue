@@ -4,8 +4,8 @@
       <div class="top d-flex">
         <img :src="data.url" class="product-image" alt="" />
 
-        <div class="icon d-flex">
-          <em class="bx bxs-heart"></em>
+        <div class="icon d-flex" @click="loveState = !loveState">
+          <em :class="loveState ? 'bx bxs-heart' : 'bx bx-heart'"></em>
         </div>
       </div>
     </div>
@@ -44,8 +44,10 @@ export default {
       default: () => {},
     },
   },
-  mounted() {
-    console.log(this.data);
+  data() {
+    return {
+      loveState: false,
+    };
   },
   methods: {
     rating(rate) {

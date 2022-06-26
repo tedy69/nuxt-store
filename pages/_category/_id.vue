@@ -15,7 +15,7 @@ import { mapState, mapActions } from "vuex";
 import DetailDescription from "../../components/detail/DetailDescription.vue";
 import DetailProduct from "../../components/detail/DetailProduct.vue";
 import NavBar from "../../components/NavBar.vue";
-import Review from "../../components/detail/Review.vue";
+import Review from "../../components/Review.vue";
 import Comment from "../../components/detail/Comment.vue";
 import Similar from "../../components/detail/Similar.vue";
 import Footer from "../../components/Footer.vue";
@@ -92,20 +92,8 @@ export default {
           font-size: 2.5rem;
           justify-content: center;
           cursor: pointer;
-          opacity: 0;
-          visibility: hidden;
+          opacity: 1;
           transition: 0.3s;
-        }
-      }
-
-      &:hover {
-        box-shadow: var(--box-shadow-1);
-
-        .top {
-          .icon {
-            opacity: 1;
-            visibility: visible;
-          }
         }
       }
     }
@@ -152,20 +140,8 @@ export default {
           font-size: 2.5rem;
           justify-content: center;
           cursor: pointer;
-          opacity: 0;
-          visibility: hidden;
+          opacity: 1;
           transition: 0.3s;
-        }
-      }
-
-      &:hover {
-        box-shadow: var(--box-shadow-1);
-
-        .top {
-          .icon {
-            opacity: 1;
-            visibility: visible;
-          }
         }
       }
     }
@@ -375,19 +351,22 @@ export default {
       opacity: 0.7;
     }
   }
-  .pagination {
+  .VueCarousel-dot-container {
     text-align: center;
     margin-top: 3rem;
 
-    .swiper-pagination-bullet {
+    .VueCarousel-dot {
       background-color: var(--primary-color);
-      height: 1rem;
-      width: 1rem;
+      height: 1rem !important;
+      width: 1rem !important;
+      padding: 0 !important;
+      margin: 0 4px;
     }
 
-    .swiper-pagination-bullet-active {
-      width: 3rem;
-      border-radius: 1.5rem;
+    .VueCarousel-dot--active {
+      width: 3rem !important;
+      border-radius: 1.5rem !important;
+      padding: 0 !important;
     }
   }
 }
