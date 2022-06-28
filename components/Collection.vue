@@ -15,7 +15,9 @@
       </div>
     </div>
 
-    <div class="products container">
+    <loading v-if="loading"></loading>
+
+    <div class="products container" v-else>
       <carousel v-bind="options">
         <slide
           class="carousel-item"
@@ -54,8 +56,10 @@
 
 <script>
 import { mapActions, mapState } from "vuex";
+import Loading from "./misc/Loading.vue";
 
 export default {
+  components: { Loading },
   data() {
     return {
       options: {
@@ -72,6 +76,7 @@ export default {
       },
       listFilter: ["Jewellery", "Accessories", "Dresses", "Footwear"],
       selected: "Jewellery",
+      loading: false,
     };
   },
   computed: {
@@ -83,7 +88,9 @@ export default {
   methods: {
     ...mapActions("products", ["getDataFilterProducts"]),
     async getProducts() {
+      this.loading = true;
       await this.getDataFilterProducts(this.selected);
+      this.loading = false;
     },
 
     rating(rate) {

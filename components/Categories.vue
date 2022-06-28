@@ -4,6 +4,8 @@
       <span>CATEGORIES</span>
       <h2>2022 Latest Collection</h2>
     </div>
+    
+    <loading v-if="loading"></loading>
 
     <div class="products container">
       <div
@@ -46,13 +48,16 @@
 
 <script>
 import { mapState, mapActions } from "vuex";
+import Loading from './misc/Loading.vue';
 export default {
+  components: { Loading },
   data() {
     return {
       page: 0,
       size: 3,
       btn_text: "Load More",
       data: [],
+      loading: false
     };
   },
   computed: {
@@ -90,7 +95,9 @@ export default {
     },
 
     async getData() {
+      this.loading = true;
       await this.getDataProducts({ page: this.page, size: this.size });
+      this.loading = false;
     },
 
     rating(rate) {

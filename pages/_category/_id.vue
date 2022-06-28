@@ -1,11 +1,12 @@
 <template>
   <div>
     <nav-bar />
-    <detail-product :data="detail_product" />
-    <detail-description />
-    <Review />
-    <Comment />
-    <Similar :data="filter_product" v-if="filter_product" />
+    <loading v-if="loading" />
+    <detail-product :data="detail_product" v-if="!loading" />
+    <detail-description v-if="!loading" />
+    <Review v-if="!loading" />
+    <Comment v-if="!loading" />
+    <Similar :data="filter_product" v-if="filter_product && !loading" />
     <Footer />
   </div>
 </template>
@@ -19,6 +20,7 @@ import Review from "../../components/Review.vue";
 import Comment from "../../components/detail/Comment.vue";
 import Similar from "../../components/detail/Similar.vue";
 import Footer from "../../components/Footer.vue";
+import Loading from "../../components/misc/Loading.vue";
 export default {
   components: {
     DetailDescription,
@@ -28,6 +30,12 @@ export default {
     Comment,
     Similar,
     Footer,
+    Loading,
+  },
+  data() {
+    return {
+      loading: false,
+    };
   },
   computed: {
     ...mapState("products", ["detail_product", "filter_product"]),
@@ -38,11 +46,13 @@ export default {
   methods: {
     ...mapActions("products", ["getDetailProducts", "getDataFilterProducts"]),
     async getData() {
+      this.loading = true;
       await this.getDetailProducts({
         id: this.$route.params.id,
         category: this.$route.params.category,
       });
       await this.getDataFilterProducts(this.$route.params.category);
+      this.loading = false;
     },
   },
 };
